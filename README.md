@@ -20,12 +20,16 @@ Insert the following code into the page which wants to display the widget.
 
 ## Trying out locally
 
+NOTE: Currently hard coding userAddress as `0xfFD1Ac3e8818AdCbe5C597ea076E8D3210B45df5`
+
 ```
 git clone https://github.com/ensdomains/renewal-widget.git
 cd renewal-widget
 npm install
 npm run dev
 ```
+
+And open the demo page on http://localhost:8080
 
 ## TODO
 
