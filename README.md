@@ -38,4 +38,5 @@ And open the demo page on http://localhost:8080
 - Add close button
 - Make "Renew" button work
 - Add "Don't show this message again"
+- Change loading order so that widget gets loaded after embeding site is loaded (so that we don't block the page we aree integrating)
 - Deploy and replace SCRIPT_URL with real URL
