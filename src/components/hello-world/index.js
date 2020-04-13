@@ -1,5 +1,6 @@
 import { Component } from "preact";
 import logo from '../../assets/ENS_Full-logo_Color.png';
+import { checkRenewal } from '@ensdomains/renewal'
 
 const imageStyles = {
   width:'50%',
@@ -50,14 +51,24 @@ const doNotShowStyle = {
 }
 
 const days = 12
-const num = 8
 export default class App extends Component {
+  async componentDidMount() {
+    if(this.props.userAddress && this.props.referrerAddress){
+      let {
+        numExpiringDomains, renewalUrl 
+      } = await checkRenewal(this.props.userAddress, this.props.referrerAddress, {})
+      if(numExpiringDomains > 0){
+        this.setState({ numExpiringDomains: numExpiringDomains });
+      }
+    }
+  }
+
   render(props) {
-    if (props.userAddress){
+    if (this.state.numExpiringDomains){
       return (
         <div style={styles}>
           <img style={imageStyles} src={logo}></img>
-          <p>You have {num} ENS names expiring in {days} days </p>
+          <p>You have {this.state.numExpiringDomains} ENS names expiring in {days} days </p>
           <button style={buttonStyle}>Renew Now</button>
           <div style={doNotShowStyle} >Don't show this message again</div>
         </div>
