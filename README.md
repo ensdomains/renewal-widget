@@ -2,7 +2,7 @@
 
 ENS Renewal widget displays a popup window if there are any expiring ENS names.
 
-## Usage
+## Usage
 
 Insert the following code into the page which wants to display the widget.
 
@@ -18,7 +18,7 @@ Insert the following code into the page which wants to display the widget.
     <script async src="SCRIPT_URL"></script>
 ```
 
-## Trying out locally
+## Trying out locally
 
 NOTE: Currently hard coding userAddress as `0xfFD1Ac3e8818AdCbe5C597ea076E8D3210B45df5`
 
