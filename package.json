@@ -1,5 +1,5 @@
 {
-  "name": "renewal-widget",
+  "name": "@ensdomains/renewal-widget",
   "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
