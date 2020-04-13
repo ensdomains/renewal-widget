@@ -32,7 +32,8 @@
     "preact-compat": "^3.17.0",
     "preact-habitat": "^3.1.0",
     "preact-render-to-string": "^4.1.0",
-    "preact-router": "^2.5.7"
+    "preact-router": "^2.5.7",
+    "styled-components": "^5.1.0"
   },
   "jest": {
     "verbose": true,

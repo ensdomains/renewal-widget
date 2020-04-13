@@ -1,6 +1,11 @@
 html, body {
 	font: 14px/1.21 'Helvetica Neue', arial, sans-serif;
 	font-weight: 400;
+	position: fixed;
+	z-index: 1;
+	top: 80px;
+	left: 0;
+	padding: 25px 0;
 }
 
 h1 {
