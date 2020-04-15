@@ -1,4 +1,6 @@
-import { Component } from "preact";
+import { Component, createRef } from "preact";
+import { useRef, useEffect } from 'preact/hooks'
+
 import logo from '../../assets/ENS_Full-logo_Color.png';
 import { checkRenewal } from '@ensdomains/renewal'
 
@@ -28,7 +30,7 @@ const styles = {
   paddingTop: '15px',
   width:'337px',
   height:'417px',
-  position:'absolute',
+  position:'fixed',
   zIndex: 1111111,
   bottom: 0,
   right: 0,
@@ -76,16 +78,66 @@ const dateDiff = function(dt1, dt2) {
 }
 
 export default class App extends Component {
-  async componentDidMount() {
-    if(this.props.userAddress && this.props.referrerAddress){
-      let {
-        numExpiringDomains, renewalUrl, firstExpiryDate
-      } = await checkRenewal(this.props.userAddress, this.props.referrerAddress, {})
-      const days = dateDiff(new Date(), firstExpiryDate)
-      if(numExpiringDomains > 0){
-        this.setState({ numExpiringDomains, days, renewalUrl });
-      }
-    }
+  ref = createRef();
+
+  constructor(){
+    console.log('constructor')
+    super()
+    // this.input = useRef(null);
+  }
+  shouldComponentUpdate() {
+    console.log('shouldComponentUpdate')
+    // do not re-render via diff:
+    // return false;
+  }
+
+  componentWillReceiveProps(a, b) {
+    console.log('componentWillReceiveProps')
+    console.log({a, b})
+    // you can do something with incoming props here if you need
+  }
+  componentWillUnmount() {
+    console.log('componentWillUnmount')
+    // component is about to be removed from the DOM, perform any cleanup.
+  }
+
+  async componentDidMount() {    
+    let {userAddress, referrerAddress} = this.props
+    let c
+    console.log('componentDidMount1', {userAddress, referrerAddress})
+    let interval = setInterval(()=>{
+      console.log('componentDidMount2')
+      // useEffect(() => {
+      //   const id = setInterval(() => {
+      //     setCount(c => c + 1);
+      //     console.log(c)
+      //   }, 1000);
+      //   return () => clearInterval(id);
+      // }, []);
+
+      // if (!userAddress && window.web3){
+      // if (!userAddress){
+      //   console.log('componentDidMount3')
+      //   // let addresses = await web3.eth.getAccounts()
+      //   let addresses
+      //   console.log('componentDidMount4')
+      //   if(addresses.length > 0){
+      //     userAddress = addresses[0]
+      //   }
+      // }
+      // if(userAddress && referrerAddress){
+      //   console.log('call checkRenweal')
+      //   let {
+      //     numExpiringDomains, renewalUrl, firstExpiryDate
+      //   } = await checkRenewal(this.props.userAddress, this.props.referrerAddress, {})
+      //   const days = dateDiff(new Date(), firstExpiryDate)
+      //   if(numExpiringDomains > 0){
+      //     this.setState({ numExpiringDomains, days, renewalUrl });
+      //   }
+      //   clearInterval(interval)
+      // }
+    }, 1000)
+
   }
 
   close = e => {
@@ -101,7 +153,7 @@ export default class App extends Component {
     if (this.state.numExpiringDomains && !this.state.closed && !window.localStorage.getItem('neverShow')){
       const { numExpiringDomains, days, renewalUrl } = this.state
       return (
-        <div style={styles}>
+        <div style={styles} ref={this.ref} >
           <span style={closeStyle} onClick={this.close}>x</span>
           <img style={imageStyles} src={logo}></img>
           <p>You have {numExpiringDomains} ENS names expiring in {days} days </p>
