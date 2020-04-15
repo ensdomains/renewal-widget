@@ -4,6 +4,8 @@ import { useRef, useEffect } from 'preact/hooks'
 import logo from '../../assets/ENS_Full-logo_Color.png';
 import { checkRenewal } from '@ensdomains/renewal'
 
+const logoImage = 'https://ensdomains.github.io/renewal-widget/src/assets/ENS_Full-logo_Color.png'
+
 const closeStyle = {
   color: "#ADBBCD",
   "padding-left": "1em",
@@ -80,27 +82,6 @@ const dateDiff = function(dt1, dt2) {
 export default class App extends Component {
   ref = createRef();
 
-  // constructor(){
-  //   console.log('constructor')
-  //   super()
-  //   // this.input = useRef(null);
-  // }
-  // shouldComponentUpdate() {
-  //   console.log('shouldComponentUpdate')
-  //   // do not re-render via diff:
-  //   // return false;
-  // }
-
-  // componentWillReceiveProps(a, b) {
-  //   console.log('componentWillReceiveProps')
-  //   console.log({a, b})
-  //   // you can do something with incoming props here if you need
-  // }
-  // componentWillUnmount() {
-  //   console.log('componentWillUnmount')
-  //   // component is about to be removed from the DOM, perform any cleanup.
-  // }
-
   async componentDidMount() {    
     let {userAddress, referrerAddress} = this.props || {}
     let self = this
@@ -144,7 +125,7 @@ export default class App extends Component {
       return (
         <div style={styles} ref={this.ref} >
           <span style={closeStyle} onClick={this.close}>x</span>
-          <img style={imageStyles} src={logo}></img>
+          <img style={imageStyles} src={logoImage}></img>
           <p>You have {numExpiringDomains} ENS names expiring in {days} days </p>
           <a style={buttonStyle} href={renewalUrl} target="_blank">Renew Now</a>
           <br/>
