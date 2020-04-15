@@ -80,64 +80,66 @@ const dateDiff = function(dt1, dt2) {
 export default class App extends Component {
   ref = createRef();
 
-  constructor(){
-    console.log('constructor')
-    super()
-    // this.input = useRef(null);
-  }
-  shouldComponentUpdate() {
-    console.log('shouldComponentUpdate')
-    // do not re-render via diff:
-    // return false;
-  }
+  // constructor(){
+  //   console.log('constructor')
+  //   super()
+  //   // this.input = useRef(null);
+  // }
+  // shouldComponentUpdate() {
+  //   console.log('shouldComponentUpdate')
+  //   // do not re-render via diff:
+  //   // return false;
+  // }
 
-  componentWillReceiveProps(a, b) {
-    console.log('componentWillReceiveProps')
-    console.log({a, b})
-    // you can do something with incoming props here if you need
-  }
-  componentWillUnmount() {
-    console.log('componentWillUnmount')
-    // component is about to be removed from the DOM, perform any cleanup.
-  }
+  // componentWillReceiveProps(a, b) {
+  //   console.log('componentWillReceiveProps')
+  //   console.log({a, b})
+  //   // you can do something with incoming props here if you need
+  // }
+  // componentWillUnmount() {
+  //   console.log('componentWillUnmount')
+  //   // component is about to be removed from the DOM, perform any cleanup.
+  // }
 
   async componentDidMount() {    
-    let {userAddress, referrerAddress} = this.props
-    let c
+    let {userAddress, referrerAddress} = this.props || {}
+    let self = this
     console.log('componentDidMount1', {userAddress, referrerAddress})
-    let interval = setInterval(()=>{
-      console.log('componentDidMount2')
-      // useEffect(() => {
-      //   const id = setInterval(() => {
-      //     setCount(c => c + 1);
-      //     console.log(c)
-      //   }, 1000);
-      //   return () => clearInterval(id);
-      // }, []);
-
+    async function callCheckRenewal() {
+      let web3 = window.web3
       // if (!userAddress && window.web3){
-      // if (!userAddress){
-      //   console.log('componentDidMount3')
-      //   // let addresses = await web3.eth.getAccounts()
-      //   let addresses
-      //   console.log('componentDidMount4')
-      //   if(addresses.length > 0){
-      //     userAddress = addresses[0]
-      //   }
-      // }
-      // if(userAddress && referrerAddress){
-      //   console.log('call checkRenweal')
-      //   let {
-      //     numExpiringDomains, renewalUrl, firstExpiryDate
-      //   } = await checkRenewal(this.props.userAddress, this.props.referrerAddress, {})
-      //   const days = dateDiff(new Date(), firstExpiryDate)
-      //   if(numExpiringDomains > 0){
-      //     this.setState({ numExpiringDomains, days, renewalUrl });
-      //   }
-      //   clearInterval(interval)
-      // }
-    }, 1000)
-
+        if (!userAddress){
+          console.log('componentDidMount3', web3.eth.getAccounts)
+          await window.ethereum.enable()
+          let addresses = await web3.eth.getAccounts() || []
+          window.ethereum.on('accountsChanged', async function(accounts) {
+            console.log('** accountsChanged')
+            debugger
+          })    
+          // let addresses = []
+          console.log('componentDidMount4', {addresses})
+          if(addresses.length > 0){
+            userAddress = addresses[0]
+          }
+        }
+        console.log({userAddress})
+        // if(userAddress && referrerAddress){
+        if(userAddress && referrerAddress){
+          console.log('call checkRenweal')
+          let {
+            numExpiringDomains, renewalUrl, firstExpiryDate
+          } = await checkRenewal(userAddress, referrerAddress, {})
+          console.log({numExpiringDomains, renewalUrl, firstExpiryDate})
+          const days = dateDiff(new Date(), firstExpiryDate)
+          if(numExpiringDomains > 0){
+            self.setState({ numExpiringDomains, days, renewalUrl });
+          }
+        }else{
+          // setTimeout(callCheckRenewal, 1000)
+        }
+    }
+    setTimeout(callCheckRenewal, 2000)
+      console.log('componentDidMount2')
   }
 
   close = e => {
@@ -150,6 +152,7 @@ export default class App extends Component {
   }
 
   render(props) {
+    console.log('render', this.state)
     if (this.state.numExpiringDomains && !this.state.closed && !window.localStorage.getItem('neverShow')){
       const { numExpiringDomains, days, renewalUrl } = this.state
       return (
