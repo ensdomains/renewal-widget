@@ -104,39 +104,25 @@ export default class App extends Component {
   async componentDidMount() {    
     let {userAddress, referrerAddress} = this.props || {}
     let self = this
-    console.log('componentDidMount1', {userAddress, referrerAddress})
     async function callCheckRenewal() {
-      let web3 = window.web3
-      // if (!userAddress && window.web3){
-        if (!userAddress){
-          console.log('componentDidMount3', web3.eth.getAccounts)
-          await window.ethereum.enable()
-          let addresses = await web3.eth.getAccounts() || []
-          window.ethereum.on('accountsChanged', async function(accounts) {
-            console.log('** accountsChanged')
-            debugger
-          })    
-          // let addresses = []
-          console.log('componentDidMount4', {addresses})
-          if(addresses.length > 0){
-            userAddress = addresses[0]
-          }
+      if (!userAddress){
+        let addresses = await window.ethereum.enable()
+        if(addresses.length > 0){
+          userAddress = addresses[0]
         }
-        console.log({userAddress})
-        // if(userAddress && referrerAddress){
-        if(userAddress && referrerAddress){
-          console.log('call checkRenweal')
-          let {
-            numExpiringDomains, renewalUrl, firstExpiryDate
-          } = await checkRenewal(userAddress, referrerAddress, {})
-          console.log({numExpiringDomains, renewalUrl, firstExpiryDate})
-          const days = dateDiff(new Date(), firstExpiryDate)
-          if(numExpiringDomains > 0){
-            self.setState({ numExpiringDomains, days, renewalUrl });
-          }
-        }else{
-          // setTimeout(callCheckRenewal, 1000)
+      }
+      if(userAddress && referrerAddress){
+        console.log('call checkRenweal')
+        let {
+          numExpiringDomains, renewalUrl, firstExpiryDate
+        } = await checkRenewal(userAddress, referrerAddress, {})
+        const days = dateDiff(new Date(), firstExpiryDate)
+        if(numExpiringDomains > 0){
+          self.setState({ numExpiringDomains, days, renewalUrl });
         }
+      }else{
+        setTimeout(callCheckRenewal, 1000)
+      }
     }
     setTimeout(callCheckRenewal, 2000)
       console.log('componentDidMount2')
