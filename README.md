@@ -33,10 +33,7 @@ And open the demo page on http://localhost:8080
 
 ## TODO
 
-- Come up with a way to set `userAddress` dynamically so that the dapp can call it when
-- Upgrade preact to 10x and change to functional component.
-- Add close button
-- Make "Renew" button work
-- Add "Don't show this message again"
 - Change loading order so that widget gets loaded after embeding site is loaded (so that we don't block the page we aree integrating)
 - Deploy and replace SCRIPT_URL with real URL
+- Fail gracelfully for eth addresses which do not own any ENS name
+- Test with envs other than Metamask
