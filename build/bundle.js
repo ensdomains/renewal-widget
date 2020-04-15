@@ -1204,6 +1204,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+var logoImage = 'https://ensdomains.github.io/renewal-widget/src/assets/ENS_Full-logo_Color.png';
+
 var closeStyle = (_closeStyle = {
   color: "#ADBBCD",
   "padding-left": "1em"
@@ -1272,7 +1274,7 @@ var dateDiff = function dateDiff(dt1, dt2) {
   return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24));
 };
 
-var _ref5 = Object(preact_min["h"])('img', { style: imageStyles, src: ENS_Full_logo_Color_default.a });
+var _ref5 = Object(preact_min["h"])('img', { style: imageStyles, src: logoImage });
 
 var _ref6 = Object(preact_min["h"])('br', null);
 
@@ -1295,27 +1297,6 @@ var hello_world_App = function (_Component) {
       _this.close();
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
-
-  // constructor(){
-  //   console.log('constructor')
-  //   super()
-  //   // this.input = useRef(null);
-  // }
-  // shouldComponentUpdate() {
-  //   console.log('shouldComponentUpdate')
-  //   // do not re-render via diff:
-  //   // return false;
-  // }
-
-  // componentWillReceiveProps(a, b) {
-  //   console.log('componentWillReceiveProps')
-  //   console.log({a, b})
-  //   // you can do something with incoming props here if you need
-  // }
-  // componentWillUnmount() {
-  //   console.log('componentWillUnmount')
-  //   // component is about to be removed from the DOM, perform any cleanup.
-  // }
 
   App.prototype.componentDidMount = function () {
     var _ref = hello_world__asyncToGenerator(function* () {
