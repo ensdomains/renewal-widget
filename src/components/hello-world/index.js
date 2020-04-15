@@ -8,7 +8,8 @@ const closeStyle = {
   color: "rgb(173, 187, 205)",
   float: "left",
   width: "100%",
-  "text-align": "left"
+  "text-align": "left",
+  cursor:"pointer"
 }
 
 const imageStyles = {
@@ -87,16 +88,28 @@ export default class App extends Component {
     }
   }
 
+  close = e => {
+    this.setState({ closed: true });
+  };
+
+  neverShow = e =>{
+    window.localStorage.setItem('neverShow', true);
+    this.close()
+  }
+
   render(props) {
-    if (this.state.numExpiringDomains ){
+    if (this.state.numExpiringDomains && !this.state.closed && !window.localStorage.getItem('neverShow')){
       const { numExpiringDomains, days, renewalUrl } = this.state
       return (
         <div style={styles}>
-          <span style={closeStyle}>x</span>
+          <span style={closeStyle} onClick={this.close}>x</span>
           <img style={imageStyles} src={logo}></img>
           <p>You have {numExpiringDomains} ENS names expiring in {days} days </p>
           <a style={buttonStyle} href={renewalUrl} target="_blank">Renew Now</a>
-          <div style={doNotShowStyle} >Don't show this message again</div>
+          <br/>
+
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" onClick={this.neverShow} />
+          <span style={doNotShowStyle} onClick={this.neverShoww} >Don't show this message again</span>
         </div>
       );
     }else{
