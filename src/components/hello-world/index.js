@@ -1,10 +1,8 @@
 import { Component, createRef } from "preact";
-import { useRef, useEffect } from 'preact/hooks'
 
-import logo from '../../assets/ENS_Full-logo_Color.png';
+import logo from '../../assets/ENS_Full-logo_Color.svg';
 import { checkRenewal } from '@ensdomains/renewal'
-
-const logoImage = 'https://ensdomains.github.io/renewal-widget/src/assets/ENS_Full-logo_Color.png'
+import "./style.scss";
 
 const closeStyle = {
   color: "#ADBBCD",
@@ -16,16 +14,15 @@ const closeStyle = {
   cursor:"pointer"
 }
 
-const imageStyles = {
-  width:'50%',
-  height:'50%',
+const imageStyle = {
+  width:'44%',
   display:'block',
   marginTop:'15px',
   marginLeft: 'auto',
   marginRight: 'auto'
 }
 
-const styles = {
+const containerStyle = {
   backgroundColor:'white',
   boxShadow: '-4px 18px 108px 20px rgba(84,112,130,0.61)',
   borderRadius: '6px',
@@ -36,7 +33,7 @@ const styles = {
   zIndex: 1111111,
   bottom: 0,
   right: 0,
-  fontFamily: 'Helvetica',
+  "font-family": "Overpass",
   fontWeight: '300',
   fontSize: '24px',
   color: '#2B2B2B',
@@ -46,25 +43,23 @@ const styles = {
 }
 
 const buttonStyle = {
-  "background":"#5384FE",
-  // "border":"2px solid #5384FE",
-  // "borderRadius":"90.72px",
-  // "fontFamily":"Helvetica",
-  // "fontSize":"14px",
-  "color":"#FFFFFF",
+    "display": "inline-block",
+    "background":"#5384FE",
+    "color":"#FFFFFF",
     "font-size": "14px",
     "font-weight": "700",
-    "font-familyv": "Overpass",
+    "font-family": "Overpass",
     "text-transform": "capitalize",
     "letter-spacingv": "1.5px",
     "text-decoration": "none",
-    "padding": "10px 25px",
+    "padding": "0.5em 25px",
     "border-radius": "25px",
     "transition": "all 0.2s ease 0s",
     "border-width": "2px",
     "border-style": "solid",
     "border-color": "rgb(83, 132, 254)",
-    "border-image": "initial"
+    "border-image": "initial",
+    "margin-bottom": "1em"
 }
 
 const doNotShowStyle = {
@@ -73,6 +68,10 @@ const doNotShowStyle = {
   "color": "#ADBBCD",
   "letterSpacing": "0",
   "textAlign": "center"
+}
+
+const messageStyle = {
+  "padding": "0 1em"
 }
 
 const dateDiff = function(dt1, dt2) {
@@ -123,10 +122,10 @@ export default class App extends Component {
     if (this.state.numExpiringDomains && !this.state.closed && !window.localStorage.getItem('neverShow')){
       const { numExpiringDomains, days, renewalUrl } = this.state
       return (
-        <div style={styles} ref={this.ref} >
+        <div style={containerStyle} ref={this.ref} >
           <span style={closeStyle} onClick={this.close}>x</span>
-          <img style={imageStyles} src={logoImage}></img>
-          <p>You have {numExpiringDomains} ENS names expiring in {days} days </p>
+          <img style={imageStyle} src={logo}></img>
+          <p style={messageStyle}>You have {numExpiringDomains} ENS names expiring in {days} days </p>
           <a style={buttonStyle} href={renewalUrl} target="_blank">Renew Now</a>
           <br/>
 
