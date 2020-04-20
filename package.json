@@ -9,6 +9,7 @@
   "scripts": {
     "test": "NODE_ENV=test jest",
     "build": "preact build --no-prerender --clean --template src/index.ejs --service-worker false",
+    "prepublishOnly": "npm run build",
     "serve": "preact serve",
     "dev": "preact watch --template src/index.ejs",
     "dist": "microbundle --entry src/components/widget/index.js"

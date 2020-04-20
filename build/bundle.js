@@ -1684,10 +1684,9 @@ var widget_App = function (_Component) {
               userAddress = addresses[0];
             }
           }
-          if (userAddress && referrerAddress) {
-            console.log('call checkRenweal');
+          if (userAddress) {
 
-            var _ref4 = yield checkRenewal(userAddress, referrerAddress, {}),
+            var _ref4 = yield checkRenewal(userAddress, null, {}),
                 numExpiringDomains = _ref4.numExpiringDomains,
                 renewalUrl = _ref4.renewalUrl,
                 firstExpiryDate = _ref4.firstExpiryDate;
@@ -1707,13 +1706,11 @@ var widget_App = function (_Component) {
       }();
 
       var _ref2 = this.props || {},
-          userAddress = _ref2.userAddress,
-          referrerAddress = _ref2.referrerAddress;
+          userAddress = _ref2.userAddress;
 
       var self = this;
 
       setTimeout(callCheckRenewal, 2000);
-      console.log('componentDidMount2');
     });
 
     function componentDidMount() {
@@ -1724,7 +1721,6 @@ var widget_App = function (_Component) {
   }();
 
   App.prototype.render = function render(props) {
-    console.log('render', this.state);
     if (this.state.numExpiringDomains && !this.state.closed && !window.localStorage.getItem('neverShow')) {
       var _state = this.state,
           numExpiringDomains = _state.numExpiringDomains,
