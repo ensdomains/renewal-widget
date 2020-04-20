@@ -80,22 +80,24 @@ const dateDiff = function(dt1, dt2) {
 
 export default class App extends Component {
   ref = createRef();
-
+  
   async componentDidMount() {    
-    let {userAddress, referrerAddress} = this.props || {}
+    console.log('Widget1', this.props)
+    let {userAddress} = this.props || {}
     let self = this
     async function callCheckRenewal() {
+      console.log('Widget2')
       if (!userAddress){
         let addresses = await window.ethereum.enable()
         if(addresses.length > 0){
           userAddress = addresses[0]
         }
       }
-      if(userAddress && referrerAddress){
+      if(userAddress){
         console.log('call checkRenweal')
         let {
           numExpiringDomains, renewalUrl, firstExpiryDate
-        } = await checkRenewal(userAddress, referrerAddress, {})
+        } = await checkRenewal(userAddress, null, {})
         const days = dateDiff(new Date(), firstExpiryDate)
         if(numExpiringDomains > 0){
           self.setState({ numExpiringDomains, days, renewalUrl });
@@ -118,7 +120,7 @@ export default class App extends Component {
   }
 
   render(props) {
-    console.log('render', this.state)
+    console.log('Widget 3 render', this.state)
     if (this.state.numExpiringDomains && !this.state.closed && !window.localStorage.getItem('neverShow')){
       const { numExpiringDomains, days, renewalUrl } = this.state
       return (
