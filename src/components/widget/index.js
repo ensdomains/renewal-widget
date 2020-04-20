@@ -83,7 +83,9 @@ export default class App extends Component {
   
   async componentDidMount() {    
     console.log('Widget1', this.props)
-    let {userAddress} = this.props || {}
+    let {userAddress, utmParams } = this.props || {}
+    if(utmParams) utmParams = JSON.parse(utmParams)
+
     let self = this
     async function callCheckRenewal() {
       console.log('Widget2')
@@ -97,7 +99,7 @@ export default class App extends Component {
         console.log('call checkRenweal')
         let {
           numExpiringDomains, renewalUrl, firstExpiryDate
-        } = await checkRenewal(userAddress, null, {})
+        } = await checkRenewal(userAddress, utmParams, {})
         const days = dateDiff(new Date(), firstExpiryDate)
         if(numExpiringDomains > 0){
           self.setState({ numExpiringDomains, days, renewalUrl });
