@@ -1,6 +1,6 @@
 import { Component, createRef } from "preact";
 
-import logo from '../../assets/ENS_Full-logo_Color.svg';
+import logo from './logo.js';
 import { checkRenewal } from '@ensdomains/renewal'
 import "./style.scss";
 
