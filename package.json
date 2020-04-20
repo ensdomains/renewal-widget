@@ -5,13 +5,13 @@
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
   "module": "dist/index.m.js",
-  "source": "components/hello-world/index.js",
+  "source": "components/widget/index.js",
   "scripts": {
     "test": "NODE_ENV=test jest",
     "build": "preact build --no-prerender --clean --template src/index.ejs --service-worker false",
     "serve": "preact serve",
     "dev": "preact watch --template src/index.ejs",
-    "dist": "microbundle --entry src/components/hello-world/index.js"
+    "dist": "microbundle --entry src/components/widget/index.js"
   },
   "keywords": [],
   "author": "Zouhir <zouhir@zouhir.org>",
