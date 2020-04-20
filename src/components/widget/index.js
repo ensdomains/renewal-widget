@@ -90,9 +90,13 @@ export default class App extends Component {
     async function callCheckRenewal() {
       console.log('Widget2')
       if (!userAddress){
-        let addresses = await window.ethereum.enable()
-        if(addresses.length > 0){
-          userAddress = addresses[0]
+        if(window.ethereum){
+          let addresses = await window.ethereum.enable()
+          if(addresses.length > 0){
+            userAddress = addresses[0]
+          }  
+        }else{
+          console.log('Failing to get Ethereum address. window.ethereum does not exist.')
         }
       }
       if(userAddress){
@@ -105,7 +109,9 @@ export default class App extends Component {
           self.setState({ numExpiringDomains, days, renewalUrl });
         }
       }else{
-        setTimeout(callCheckRenewal, 1000)
+        if(window.ethereum){
+          setTimeout(callCheckRenewal, 1000)
+        }
       }
     }
     setTimeout(callCheckRenewal, 2000)

@@ -30,7 +30,7 @@
     "sass-loader": "^6.0.6"
   },
   "dependencies": {
-    "@ensdomains/renewal": "0.0.7",
+    "@ensdomains/renewal": "0.0.8",
     "preact": "^10.4.0",
     "preact-habitat": "^3.1.0",
     "preact-render-to-string": "^5.1.6",

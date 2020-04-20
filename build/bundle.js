@@ -1520,8 +1520,19 @@ var client = new src["GraphQLClient"](endpoint, {
   }
 });
 
+var jsonToQueryString = function jsonToQueryString(json) {
+  if (!json) return '';
+  return '?' + Object.keys(json).map(function (key) {
+    return encodeURIComponent(key) + '=' + encodeURIComponent(json[key]);
+  }).join('&');
+};
+
+// const host = 'https://app.ens.domains'
+// Test site for bulk renewal
+var host = 'http://craven-cup.surge.sh';
+
 var checkRenewal = function () {
-  var _ref = _asyncToGenerator(function* (userAddress, referrerAddress, _ref2) {
+  var _ref = _asyncToGenerator(function* (userAddress, utmParams, _ref2) {
     var expiryDate = _ref2.expiryDate,
         debug = _ref2.debug;
 
@@ -1548,7 +1559,7 @@ var checkRenewal = function () {
     var res = {
       numExpiringDomains: count,
       firstExpiryDate: firstExpiryDate && new Date(firstExpiryDate * 1000),
-      renewalUrl: 'https://app.ens.domains/address/' + userAddress + '?referrer=' + referrerAddress
+      renewalUrl: host + '/address/' + userAddress + jsonToQueryString(utmParams)
     };
     return res;
   });
@@ -1678,6 +1689,7 @@ var widget_App = function (_Component) {
     var _ref = widget__asyncToGenerator(function* () {
       var callCheckRenewal = function () {
         var _ref3 = widget__asyncToGenerator(function* () {
+          console.log('Widget2');
           if (!userAddress) {
             var addresses = yield window.ethereum.enable();
             if (addresses.length > 0) {
@@ -1685,8 +1697,9 @@ var widget_App = function (_Component) {
             }
           }
           if (userAddress) {
+            console.log('call checkRenweal');
 
-            var _ref4 = yield checkRenewal(userAddress, null, {}),
+            var _ref4 = yield checkRenewal(userAddress, utmParams, {}),
                 numExpiringDomains = _ref4.numExpiringDomains,
                 renewalUrl = _ref4.renewalUrl,
                 firstExpiryDate = _ref4.firstExpiryDate;
@@ -1705,12 +1718,18 @@ var widget_App = function (_Component) {
         };
       }();
 
+      console.log('Widget1', this.props);
+
       var _ref2 = this.props || {},
-          userAddress = _ref2.userAddress;
+          userAddress = _ref2.userAddress,
+          utmParams = _ref2.utmParams;
+
+      if (utmParams) utmParams = JSON.parse(utmParams);
 
       var self = this;
 
       setTimeout(callCheckRenewal, 2000);
+      console.log('componentDidMount2');
     });
 
     function componentDidMount() {
@@ -1721,6 +1740,7 @@ var widget_App = function (_Component) {
   }();
 
   App.prototype.render = function render(props) {
+    console.log('Widget 3 render', this.state);
     if (this.state.numExpiringDomains && !this.state.closed && !window.localStorage.getItem('neverShow')) {
       var _state = this.state,
           numExpiringDomains = _state.numExpiringDomains,
