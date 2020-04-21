@@ -1549,8 +1549,8 @@ var checkRenewal = function () {
     }),
         account = _ref3.account;
 
-    var count = account.registrations.length;
-    var firstExpiryDate = account.registrations[0] && account.registrations[0].expiryDate;
+    var count = account ? account.registrations.length : 0;
+    var firstExpiryDate = account && account.registrations[0] && account.registrations[0].expiryDate;
     if (debug) {
       console.log(account.registrations.map(function (r) {
         return [r.domain.labelName, new Date(r.expiryDate * 1000)];
@@ -1691,9 +1691,13 @@ var widget_App = function (_Component) {
         var _ref3 = widget__asyncToGenerator(function* () {
           console.log('Widget2');
           if (!userAddress) {
-            var addresses = yield window.ethereum.enable();
-            if (addresses.length > 0) {
-              userAddress = addresses[0];
+            if (window.ethereum) {
+              var addresses = yield window.ethereum.enable();
+              if (addresses.length > 0) {
+                userAddress = addresses[0];
+              }
+            } else {
+              console.log('Failing to get Ethereum address. window.ethereum does not exist.');
             }
           }
           if (userAddress) {
@@ -1709,7 +1713,9 @@ var widget_App = function (_Component) {
               self.setState({ numExpiringDomains: numExpiringDomains, days: days, renewalUrl: renewalUrl });
             }
           } else {
-            setTimeout(callCheckRenewal, 1000);
+            if (window.ethereum) {
+              setTimeout(callCheckRenewal, 1000);
+            }
           }
         });
 
