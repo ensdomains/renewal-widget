@@ -4,7 +4,6 @@ import { h, render } from "preact";
 
 import App from "./components/widget";
 const RenewalWidget = function(props){
-  console.log('** renewal', {props})
   if(props.userAddress){
     const app = <App {...props} />
     render(app, document.body);  
