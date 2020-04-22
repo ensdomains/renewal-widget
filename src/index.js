@@ -9,5 +9,5 @@ const RenewalWidget = function(props){
     render(app, document.body);  
   }
 }
-
+window.RenewalWidget = RenewalWidget
 export default RenewalWidget
