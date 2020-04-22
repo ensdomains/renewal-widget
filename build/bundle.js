@@ -3,10 +3,10 @@
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
-	else {
-		var a = factory();
-		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-	}
+	else if(typeof exports === 'object')
+		exports["RenewalWidget"] = factory();
+	else
+		root["RenewalWidget"] = factory();
 })(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "pwNi");
+/******/ 	return __webpack_require__(__webpack_require__.s = "JkW7");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1480,7 +1480,6 @@ var widget_App = function (_Component) {
 
 
 // CONCATENATED MODULE: ./index.js
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ENSRenewal", function() { return index_ENSRenewal; });
 
 
 // let poly = require("preact-cli/lib/lib/webpack/polyfills");
@@ -1488,17 +1487,15 @@ var widget_App = function (_Component) {
 
 
 
-console.log({ App: widget_App });
-var index_ENSRenewal = function ENSRenewal(props) {
+var index_RenewalWidget = function RenewalWidget(props) {
   console.log('** renewal', { props: props });
   if (props.userAddress) {
     var app = Object(preact_min["h"])(widget_App, props);
     Object(preact_min["render"])(app, document.body);
   }
 };
-if (typeof window !== undefined) window.ENSRenewal = index_ENSRenewal;
 
-
+/* harmony default export */ var index = __webpack_exports__["default"] = (index_RenewalWidget);
 
 /***/ }),
 
@@ -2057,43 +2054,8 @@ function toComment(sourceMap) {
 	return '/*# ' + data + ' */';
 }
 
-/***/ }),
-
-/***/ "pwNi":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _preact = __webpack_require__("KM04");
-
-if (false) {
-	require('preact/devtools');
-} else if (false) {
-	navigator.serviceWorker.register(__webpack_public_path__ + 'sw.js');
-}
-
-var interopDefault = function interopDefault(m) {
-	return m && m.default ? m.default : m;
-};
-
-var app = interopDefault(__webpack_require__("JkW7"));
-
-if (typeof app === 'function') {
-	var root = document.body.firstElementChild;
-
-	var init = function init() {
-		var app = interopDefault(__webpack_require__("JkW7"));
-		root = (0, _preact.render)((0, _preact.h)(app), document.body, root);
-	};
-
-	if (false) module.hot.accept('preact-cli-entrypoint', init);
-
-	init();
-}
-
 /***/ })
 
-/******/ });
+/******/ })["default"];
 });
 //# sourceMappingURL=bundle.js.map

@@ -7,8 +7,8 @@ ENS Renewal widget displays a popup window if there are any expiring ENS names.
 Insert the following code into index.html
 
 ```
-require('@ensdomains/renewal-widget')
-window.ENSRenewal({
+import RenewalWidget from '@ensdomains/renewal-widget'
+ENSRenewal({
     userAddress,
     utmParams:{"utm_source": "YOURSITE", "utm_medium": "web", "utm_campaign":"renewal"}
 })
