@@ -1,4 +1,4 @@
-import { Component, createRef } from "preact";
+import { h, Component, createRef } from "preact";
 
 import logo from './logo.js';
 import { checkRenewal } from '@ensdomains/renewal'
@@ -79,43 +79,18 @@ const dateDiff = function(dt1, dt2) {
 }
 
 export default class App extends Component {
-  ref = createRef();
-  
-  async componentDidMount() {    
-    console.log('Widget1', this.props)
-    let {userAddress, utmParams } = this.props || {}
-    if(utmParams) utmParams = JSON.parse(utmParams)
 
-    let self = this
-    async function callCheckRenewal() {
-      console.log('Widget2')
-      if (!userAddress){
-        if(window.ethereum){
-          let addresses = await window.ethereum.enable()
-          if(addresses.length > 0){
-            userAddress = addresses[0]
-          }  
-        }else{
-          console.log('Failing to get Ethereum address. window.ethereum does not exist.')
-        }
-      }
-      if(userAddress){
-        console.log('call checkRenweal')
-        let {
-          numExpiringDomains, renewalUrl, firstExpiryDate
-        } = await checkRenewal(userAddress, utmParams, {})
-        const days = dateDiff(new Date(), firstExpiryDate)
-        if(numExpiringDomains > 0){
-          self.setState({ numExpiringDomains, days, renewalUrl });
-        }
-      }else{
-        if(window.ethereum){
-          setTimeout(callCheckRenewal, 1000)
-        }
-      }
-    }
-    setTimeout(callCheckRenewal, 2000)
-      console.log('componentDidMount2')
+  async componentDidMount(props) {
+    await this.doCheckRenewal(this.props)
+  }
+
+  async doCheckRenewal({userAddress, utmParams}){
+    let {
+      numExpiringDomains, renewalUrl, firstExpiryDate
+    } = await checkRenewal(userAddress, utmParams, {})
+    const days = firstExpiryDate ? dateDiff(new Date(), firstExpiryDate) : 0
+    this.setState({ numExpiringDomains, days, renewalUrl });
+    return {numExpiringDomains, days, renewalUrl}
   }
 
   close = e => {
@@ -127,10 +102,11 @@ export default class App extends Component {
     this.close()
   }
 
-  render(props) {
-    console.log('Widget 3 render', this.state)
-    if (this.state.numExpiringDomains && !this.state.closed && !window.localStorage.getItem('neverShow')){
-      const { numExpiringDomains, days, renewalUrl } = this.state
+  render(props, state) {
+    if(state.closed || window.localStorage.getItem('neverShow')) return null
+
+    let { numExpiringDomains, days, renewalUrl } = state
+    if (numExpiringDomains){
       return (
         <div style={containerStyle} ref={this.ref} >
           <span style={closeStyle} onClick={this.close}>x</span>
@@ -138,7 +114,6 @@ export default class App extends Component {
           <p style={messageStyle}>You have {numExpiringDomains} ENS names expiring in {days} days </p>
           <a style={buttonStyle} href={renewalUrl} target="_blank">Renew Now</a>
           <br/>
-
           <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" onClick={this.neverShow} />
           <span style={doNotShowStyle} onClick={this.neverShoww} >Don't show this message again</span>
         </div>

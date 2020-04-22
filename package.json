@@ -1,27 +1,25 @@
 {
   "name": "@ensdomains/renewal-widget",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "description": "",
-  "main": "dist/index.js",
-  "umd:main": "dist/index.umd.js",
-  "module": "dist/index.m.js",
-  "source": "components/widget/index.js",
+  "main": "build/renewal-widget.js",
+  "jsdelivr": "build/renewal-widget.js",
+  "source": "src/index.js",
   "scripts": {
     "test": "NODE_ENV=test jest",
-    "build": "preact build --no-prerender --clean --template src/index.ejs --service-worker false",
+    "build": "preact build --no-prerender --clean --template src/index.ejs --service-worker false --production",
     "prepublishOnly": "npm run build",
     "serve": "preact serve",
-    "dev": "preact watch --template src/index.ejs",
-    "dist": "microbundle --entry src/components/widget/index.js"
+    "dev": "preact watch --template src/index.ejs"
   },
   "keywords": [],
-  "author": "Zouhir <zouhir@zouhir.org>",
-  "license": "MIT",
+  "author": "Makoto Inoue",
+  "license": "BSD-2-Clause",
   "devDependencies": {
     "eslint": "^4.5.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^21.2.1",
-    "microbundle": "^0.6.0",
+    "microbundle": "^0.11.0",
     "node-sass": "^4.5.3",
     "preact-cli": "^2.2.1",
     "preact-cli-plugin-fast-async": "^1.0.1",
@@ -30,7 +28,8 @@
     "sass-loader": "^6.0.6"
   },
   "dependencies": {
-    "@ensdomains/renewal": "0.0.8",
+    "@ensdomains/renewal": "0.0.9",
+    "penpal": "^4.1.1",
     "preact": "^10.4.0",
     "preact-habitat": "^3.1.0",
     "preact-render-to-string": "^5.1.6",
@@ -42,8 +41,7 @@
       "^.+\\.js$": "babel-jest"
     },
     "moduleFileExtensions": [
-      "js",
-      "jsx"
+      "js"
     ],
     "testEnvironment": "node",
     "moduleNameMapper": {

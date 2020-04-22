@@ -2,21 +2,38 @@
 
 ENS Renewal widget displays a popup window if there are any expiring ENS names.
 
-## Usage
-
-Insert the following code into index.html
+## Install
 
 ```
-    <div
-        data-widget-host="ensdomains-renewal-widget"
-        data-props-utm-paramsdata-props-utm-params='{"utm_source": "YOURSITE", "utm_medium": "web", "utm_campaign":"renewal"}'
-    >
-    </div>
-    <script async src="https://cdn.jsdelivr.net/npm/@ensdomains/renewal-widget/build/bundle.js"></script>
+npm install @ensdomains/renewal-widget
 ```
 
-If you pass  `data-prop-user-address="ETHADDRESS"` it loads expiring name of the specified Ethereum address.
-Otherwise, the widget calls `window.ethereum.enable()` to get the Ethereum address.
+## Initialising
+
+
+```
+import RenewalWidget from '@ensdomains/renewal-widget'
+RenewalWidget({
+    userAddress,
+    utmParams:{"utm_source": "YOURSITE", "utm_medium": "web", "utm_campaign":"renewal"}
+})
+```
+
+## CDN
+
+```
+<script
+    async
+    src="https://cdn.jsdelivr.net/npm/@ensdomains/renewal-widget@latest/build/renewal-widget.js"
+></script>
+
+<script>
+RenewalWidget({
+    userAddress,
+    utmParams:{"utm_source": "YOURSITE", "utm_medium": "web", "utm_campaign":"renewal"}
+})
+</script>
+```
 
 ## Trying out locally
 

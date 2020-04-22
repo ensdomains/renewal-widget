@@ -1,7 +1,12 @@
 
 export default (config, env, helpers) => {
+  config.entry = './index.js'
+  config.output.library = 'RenewalWidget'
+  config.output.libraryTarget = 'umd'
+  config.output.libraryExport = 'default' 
+
   delete config.entry.polyfills;
-  config.output.filename = "[name].js";
+  config.output.filename = "renewal-widget.js";
   let { plugin } = helpers.getPluginsByName(config, "ExtractTextPlugin")[0];
   plugin.options.disable = true;
 

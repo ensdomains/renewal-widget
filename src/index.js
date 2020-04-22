@@ -1,13 +1,13 @@
-let poly = require("preact-cli/lib/lib/webpack/polyfills");
+// let poly = require("preact-cli/lib/lib/webpack/polyfills");
+import "preact/debug";
+import { h, render } from "preact";
 
-import { h } from "preact";
-import habitat from "preact-habitat";
-
-import Widget from "./components/widget";
-
-let _habitat = habitat(Widget);
-
-_habitat.render({
-  selector: '[data-widget-host="ensdomains-renewal-widget"]',
-  clean: true
-});
+import App from "./components/widget";
+const RenewalWidget = function(props){
+  if(props.userAddress){
+    const app = <App {...props} />
+    render(app, document.body);  
+  }
+}
+window.RenewalWidget = RenewalWidget
+export default RenewalWidget
