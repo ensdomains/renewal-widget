@@ -28,7 +28,7 @@
     "sass-loader": "^6.0.6"
   },
   "dependencies": {
-    "@ensdomains/renewal": "0.0.9",
+    "@ensdomains/renewal": "0.0.10",
     "penpal": "^4.1.1",
     "preact": "^10.4.0",
     "preact-habitat": "^3.1.0",

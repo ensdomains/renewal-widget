@@ -15,7 +15,7 @@ npm install @ensdomains/renewal-widget
 import RenewalWidget from '@ensdomains/renewal-widget'
 RenewalWidget({
     userAddress,
-    utmParams:{"utm_source": "YOURSITE", "utm_medium": "web", "utm_campaign":"renewal"}
+    queryParams:{"utm_source": "YOURSITE", "utm_medium": "web", "utm_campaign":"renewal"}
 })
 ```
 
@@ -30,7 +30,7 @@ RenewalWidget({
 <script>
 RenewalWidget({
     userAddress,
-    utmParams:{"utm_source": "YOURSITE", "utm_medium": "web", "utm_campaign":"renewal"}
+    queryParams:{"utm_source": "YOURSITE", "utm_medium": "web", "utm_campaign":"renewal"}
 })
 </script>
 ```

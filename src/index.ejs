@@ -10,14 +10,15 @@
 
 <body>
   <script
-      src="https://cdn.jsdelivr.net/npm/@ensdomains/renewal-widget@latest/build/renewal-widget.js"
+      src="/renewal-widget.js"
   ></script>
 
   <script>
-  const userAddress = '0xfFD1Ac3e8818AdCbe5C597ea076E8D3210B45df5'
+  const userAddress = '0xd4D221aD5b753a6fcBB58a6C7b6b92605CA5325F'
   RenewalWidget({
       userAddress,
-      utmParams:{"utm_source": "YOURSITE", "utm_medium": "web", "utm_campaign":"renewal"}
+      queryParams:{"utm_source": "YOURSITE", "utm_medium": "web", "utm_campaign":"renewal"},
+      days:90
   })
   </script>
   </div>
