@@ -71,7 +71,8 @@ const doNotShowStyle = {
 }
 
 const messageStyle = {
-  "padding": "0 1em"
+  "padding": "0 1em",
+  "font-size": "22px"
 }
 
 const dateDiff = function(dt1, dt2) {

@@ -1452,7 +1452,7 @@ var widget_App = function (_Component) {
           numExpiringDomains,
           ' ENS name',
           numExpiringDomains > 1 ? 's' : '',
-          ' in the grace period or expiring in the next ',
+          'expiring in the next ',
           days,
           ' days.'
         ),
