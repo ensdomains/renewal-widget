@@ -217,10 +217,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@ensdomains/renewal@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@ensdomains/renewal/-/renewal-0.0.11.tgz#40b82cb6c84a4c87387d60e8a57cb4f06704cf3b"
-  integrity sha512-ySSnI/y6Q1RttwIQsX+lzVxSs0iWutihUvsBzLOpTO4qGLmTwKt+cs9OsTb00653gfTaKJlkzBkU9YcfLo+DHg==
+"@ensdomains/renewal@0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@ensdomains/renewal/-/renewal-0.0.12.tgz#d2712099d1684acb748495220bd10bfac855a0c4"
+  integrity sha512-1fgZ3nvSGFDDab1djJOA/3pPdS/KCzcLgQctlpUP/NhvbuneRLW8GlZO9kgM6xmVOW3VimXjjRZ+TEEB4R5WGw==
   dependencies:
     esm "^3.2.25"
     graphql-request "^1.8.2"
