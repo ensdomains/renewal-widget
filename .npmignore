@@ -1,0 +1,8 @@
+src
+build/index.html
+build/favicon.ico
+preact.config.js
+build/manifest.json
+yarn-error.log
+README.md
+build/assets/icon.png

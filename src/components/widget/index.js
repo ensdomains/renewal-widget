@@ -84,11 +84,10 @@ export default class App extends Component {
     await this.doCheckRenewal(this.props)
   }
 
-  async doCheckRenewal({userAddress, utmParams}){
+  async doCheckRenewal({userAddress, queryParams, days=30}){
     let {
-      numExpiringDomains, renewalUrl, firstExpiryDate
-    } = await checkRenewal(userAddress, utmParams, {})
-    const days = firstExpiryDate ? dateDiff(new Date(), firstExpiryDate) : 0
+      numExpiringDomains, renewalUrl
+    } = await checkRenewal(userAddress, queryParams, { days })
     this.setState({ numExpiringDomains, days, renewalUrl });
     return {numExpiringDomains, days, renewalUrl}
   }
@@ -111,7 +110,9 @@ export default class App extends Component {
         <div style={containerStyle} ref={this.ref} >
           <span style={closeStyle} onClick={this.close}>x</span>
           <img style={imageStyle} src={logo}></img>
-          <p style={messageStyle}>You have {numExpiringDomains} ENS names expiring in {days} days </p>
+          <p style={messageStyle}>
+            You have {numExpiringDomains} ENS name{ numExpiringDomains > 1 ? 's' : '' } in the grace period or expiring in the next {days} days.
+          </p>
           <a style={buttonStyle} href={renewalUrl} target="_blank">Renew Now</a>
           <br/>
           <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" onClick={this.neverShow} />
