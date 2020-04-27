@@ -1250,7 +1250,7 @@ var checkRenewal = function () {
         debug = _ref2.debug;
 
     var date = new Date();
-    var expiryDate = date.setDate(date.getDate() + (-90 + days));
+    var expiryDate = date.setDate(date.getDate() + days);
 
     var _ref3 = yield client.request(GET_DOMAINS_OWNED_BY_ADDRESS_FROM_SUBGRAPH, {
       userAddress: userAddress.toLowerCase(),
@@ -1457,9 +1457,9 @@ var widget_App = function (_Component) {
           numExpiringDomains,
           ' ENS name',
           numExpiringDomains > 1 ? 's' : '',
-          ' expiring  in the next ',
+          ' in the grace period or expiring in the next ',
           days,
-          ' days'
+          ' days.'
         ),
         Object(preact_min["h"])(
           'a',

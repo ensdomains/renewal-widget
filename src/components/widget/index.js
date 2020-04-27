@@ -86,9 +86,8 @@ export default class App extends Component {
 
   async doCheckRenewal({userAddress, queryParams, days=30}){
     let {
-      numExpiringDomains, renewalUrl, firstExpiryDate
+      numExpiringDomains, renewalUrl
     } = await checkRenewal(userAddress, queryParams, { days })
-    // const days = firstExpiryDate ? dateDiff(new Date(), firstExpiryDate) : 0
     this.setState({ numExpiringDomains, days, renewalUrl });
     return {numExpiringDomains, days, renewalUrl}
   }
