@@ -1244,16 +1244,13 @@ var jsonToQueryString = function jsonToQueryString(json) {
 var host = 'http://ensappdev.surge.sh';
 
 var checkRenewal = function () {
-  var _ref = _asyncToGenerator(function* (userAddress, queryParams, _ref2) {
-    var expiryDate = _ref2.expiryDate,
+  var _ref = _asyncToGenerator(function* (userAddress, utmParams, _ref2) {
+    var _ref2$days = _ref2.days,
+        days = _ref2$days === undefined ? 30 : _ref2$days,
         debug = _ref2.debug;
 
-    if (!expiryDate) {
-      var date = new Date();
-      expiryDate = date.setDate(date.getDate() + 30);
-    } else {
-      expiryDate = expiryDate.getTime();
-    }
+    var date = new Date();
+    var expiryDate = date.setDate(date.getDate() + (-90 + days));
 
     var _ref3 = yield client.request(GET_DOMAINS_OWNED_BY_ADDRESS_FROM_SUBGRAPH, {
       userAddress: userAddress.toLowerCase(),
@@ -1262,16 +1259,18 @@ var checkRenewal = function () {
         account = _ref3.account;
 
     var count = account ? account.registrations.length : 0;
-    var firstExpiryDate = account && account.registrations[0] && account.registrations[0].expiryDate;
-    if (debug) {
+    var endOfGracePeriod = new Date(expiryDate);
+    endOfGracePeriod.setDate(endOfGracePeriod.getDate() + 90);
+    if (debug && account) {
       console.log(account.registrations.map(function (r) {
         return [r.domain.labelName, new Date(r.expiryDate * 1000)];
       }));
     }
     var res = {
       numExpiringDomains: count,
-      firstExpiryDate: firstExpiryDate && new Date(firstExpiryDate * 1000),
-      renewalUrl: host + '/address/' + userAddress + jsonToQueryString(queryParams)
+      renewalUrl: host + '/address/' + userAddress + jsonToQueryString(utmParams),
+      expiryDate: new Date(expiryDate),
+      endOfGracePeriod: endOfGracePeriod
     };
     return res;
   });
@@ -1412,14 +1411,17 @@ var widget_App = function (_Component) {
   App.prototype.doCheckRenewal = function () {
     var _ref2 = widget__asyncToGenerator(function* (_ref3) {
       var userAddress = _ref3.userAddress,
-          queryParams = _ref3.queryParams;
+          queryParams = _ref3.queryParams,
+          _ref3$days = _ref3.days,
+          days = _ref3$days === undefined ? 30 : _ref3$days;
 
-      var _ref4 = yield checkRenewal(userAddress, queryParams, {}),
+      var _ref4 = yield checkRenewal(userAddress, queryParams, { days: days }),
           numExpiringDomains = _ref4.numExpiringDomains,
           renewalUrl = _ref4.renewalUrl,
           firstExpiryDate = _ref4.firstExpiryDate;
+      // const days = firstExpiryDate ? dateDiff(new Date(), firstExpiryDate) : 0
 
-      var days = firstExpiryDate ? dateDiff(new Date(), firstExpiryDate) : 0;
+
       this.setState({ numExpiringDomains: numExpiringDomains, days: days, renewalUrl: renewalUrl });
       return { numExpiringDomains: numExpiringDomains, days: days, renewalUrl: renewalUrl };
     });
@@ -1453,9 +1455,11 @@ var widget_App = function (_Component) {
           { style: messageStyle },
           'You have ',
           numExpiringDomains,
-          ' ENS names expiring in ',
+          ' ENS name',
+          numExpiringDomains > 1 ? 's' : '',
+          ' expiring  in the next ',
           days,
-          ' days '
+          ' days'
         ),
         Object(preact_min["h"])(
           'a',

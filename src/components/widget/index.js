@@ -112,7 +112,7 @@ export default class App extends Component {
           <span style={closeStyle} onClick={this.close}>x</span>
           <img style={imageStyle} src={logo}></img>
           <p style={messageStyle}>
-            You have {numExpiringDomains} ENS name{ numExpiringDomains > 1 ? 's' : '' } expiring  in the next {days} days
+            You have {numExpiringDomains} ENS name{ numExpiringDomains > 1 ? 's' : '' } in the grace period or expiring in the next {days} days.
           </p>
           <a style={buttonStyle} href={renewalUrl} target="_blank">Renew Now</a>
           <br/>
