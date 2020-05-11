@@ -73,7 +73,7 @@ We will be using [Google Analytics ecommerce plugin](https://developers.google.c
 
 ### How much is the referral fee?
 
-5% to begin with (at least until August 2021). We will revise the rate periodically.
+5% to begin with (at least until August 2020). We will revise the rate periodically.
 
 ### How do I become the referral partner?
 
