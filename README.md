@@ -17,7 +17,8 @@ npm install @ensdomains/renewal-widget
 import RenewalWidget from '@ensdomains/renewal-widget'
 RenewalWidget({
     userAddress,
-    queryParams:{"utm_source": "YOURSITE"}
+    queryParams:{"utm_source": "YOURSITE"},
+    days: 30 // optional. set to 30 days beore expiry date.
 })
 ```
 
@@ -50,9 +51,9 @@ npm run dev
 
 And open the demo page on http://localhost:8080
 
-## Demo page 
+## Live demo page 
 
-- [kickback.events](https://kickback.events)
+- [kickback.events](https://kickback.events) ([PR](https://github.com/wearekickback/app/pull/338/files))
 
 If you connect with the address which owns expiring/expired ENS names, it should popup the widget when your app connects to your wallet.
 
