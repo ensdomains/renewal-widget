@@ -33,7 +33,8 @@ RenewalWidget({
 <script>
 RenewalWidget({
     userAddress,
-    queryParams:{"utm_source": "YOURSITE"}
+    queryParams:{"utm_source": "YOURSITE"},
+    days: 30 // optional. The default is set to 30 days beore expiry date.
 })
 </script>
 ```
