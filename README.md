@@ -70,7 +70,7 @@ If you don't connect with such addresses, you can still see the demo by passing 
 ### How do you track the referral code?
 
 We will be using [Google Analytics ecommerce plugin](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce) on [ENS App](https://app.ens.domains).
-Google analytics will keep track of session info so that user's renewal referral goes to the first referral source during the session even when the user refresh page and the URL no longer contains the `utm_source`.
+Google analytics will keep track of session info so that user's renewal referral goes to the first referral source during the session even when the user move around ENS page and the URL no longer contains the `utm_source` by the time the user register/renew.
 
 ### How much is the referral fee?
 
