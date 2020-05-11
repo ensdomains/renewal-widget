@@ -1363,7 +1363,8 @@ var doNotShowStyle = {
 };
 
 var messageStyle = {
-  "padding": "0 1em"
+  "padding": "0 1em",
+  "font-size": "22px"
 };
 
 var dateDiff = function dateDiff(dt1, dt2) {
@@ -1452,7 +1453,7 @@ var widget_App = function (_Component) {
           numExpiringDomains,
           ' ENS name',
           numExpiringDomains > 1 ? 's' : '',
-          'expiring in the next ',
+          ' in the grace period or expiring in the next ',
           days,
           ' days.'
         ),
