@@ -2,6 +2,8 @@
 
 ENS Renewal widget displays a popup window if there are any expiring ENS names.
 
+NOTE: We will be whitelisting the rererral partners. To apply, please apply via [google form](https://forms.gle/zCX5RH1aQ4RnTnAXA).
+
 ## Install
 
 ```
@@ -47,3 +49,5 @@ npm run dev
 ```
 
 And open the demo page on http://localhost:8080
+
+
