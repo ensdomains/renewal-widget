@@ -50,4 +50,14 @@ npm run dev
 
 And open the demo page on http://localhost:8080
 
+## Demo page 
 
+- [kickback.events](https://kickback.events)
+
+If you connect with the address which owns expiring/expired ENS names, it should popup the widget when your app connects to your wallet.
+
+![](https://i.ibb.co/dQ6nhxd/Screenshot-2020-05-11-at-10-30-06.png)
+
+If you don't connect with such addresses, you can still see the demo by passing the address of an ENS whale 
+
+- https://kickback.events/?RWuserAddress=0xa7f3659c53820346176f7e0e350780df304db179&RWdays=300
