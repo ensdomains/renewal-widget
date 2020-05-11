@@ -18,7 +18,7 @@ import RenewalWidget from '@ensdomains/renewal-widget'
 RenewalWidget({
     userAddress,
     queryParams:{"utm_source": "YOURSITE"},
-    days: 30 // optional. set to 30 days beore expiry date.
+    days: 30 // optional. The default is set to 30 days beore expiry date.
 })
 ```
 
