@@ -2,7 +2,7 @@
 
 ENS Renewal widget displays a popup window if there are any expiring ENS names.
 
-NOTE: We will be whitelisting the rererral partners. To apply, please apply via [google form](https://forms.gle/zCX5RH1aQ4RnTnAXA).
+NOTE: We will be whitelisting the rererral partners. To apply, please read FAQ.
 
 ## Install
 
@@ -62,3 +62,24 @@ If you connect with the address which owns expiring/expired ENS names, it should
 If you don't connect with such addresses, you can still see the demo by passing the address of an ENS whale 
 
 - https://kickback.events/?RWuserAddress=0xa7f3659c53820346176f7e0e350780df304db179&RWdays=300
+
+
+## FAQ
+
+### How do you track the referral code?
+
+We will be using [Google Analytics ecommerce plugin](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce) on [ENS App](https://app.ens.domains).
+Google analytics will keep track of session info so that user's renewal referral goes to the first referral source during the session even when the user refresh page and the URL no longer contains the `utm_source`.
+
+### How much is the referral fee?
+
+5% to begin with (at least until August 2021). We will revise the rate periodically.
+
+### How do I become the referral partner?
+
+
+Please apply via [google form](https://forms.gle/zCX5RH1aQ4RnTnAXA)
+
+### I want to customise the widget.
+
+If you want to have full control of how to show ENS referral, I suggest using our [renewal library](https://github.com/ensdomains/renewal) wchich this widget uses underneath.
