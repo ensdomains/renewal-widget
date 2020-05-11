@@ -1239,9 +1239,7 @@ var jsonToQueryString = function jsonToQueryString(json) {
   }).join('&');
 };
 
-// const host = 'https://app.ens.domains'
-// Test site for bulk renewal
-var host = 'http://ensappdev.surge.sh';
+var host = 'https://app.ens.domains';
 
 var checkRenewal = function () {
   var _ref = _asyncToGenerator(function* (userAddress, utmParams, _ref2) {
@@ -1365,7 +1363,8 @@ var doNotShowStyle = {
 };
 
 var messageStyle = {
-  "padding": "0 1em"
+  "padding": "0 1em",
+  "font-size": "22px"
 };
 
 var dateDiff = function dateDiff(dt1, dt2) {
@@ -1417,10 +1416,7 @@ var widget_App = function (_Component) {
 
       var _ref4 = yield checkRenewal(userAddress, queryParams, { days: days }),
           numExpiringDomains = _ref4.numExpiringDomains,
-          renewalUrl = _ref4.renewalUrl,
-          firstExpiryDate = _ref4.firstExpiryDate;
-      // const days = firstExpiryDate ? dateDiff(new Date(), firstExpiryDate) : 0
-
+          renewalUrl = _ref4.renewalUrl;
 
       this.setState({ numExpiringDomains: numExpiringDomains, days: days, renewalUrl: renewalUrl });
       return { numExpiringDomains: numExpiringDomains, days: days, renewalUrl: renewalUrl };
