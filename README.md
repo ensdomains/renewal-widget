@@ -70,7 +70,6 @@ If you don't connect with such addresses, you can still see the demo by passing 
 ### How do you track the referral code?
 
 We will be using [Google Analytics ecommerce plugin](https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce) on [ENS App](https://app.ens.domains).
-Google analytics will keep track of session info so that user's renewal referral goes to the first referral source during the session even when the user move around ENS page and the URL no longer contains the `utm_source` by the time the user register/renew.
 
 ### How much is the referral fee?
 
@@ -78,9 +77,12 @@ Google analytics will keep track of session info so that user's renewal referral
 
 ### How do I become the referral partner?
 
-
 Please apply via [google form](https://forms.gle/zCX5RH1aQ4RnTnAXA)
 
 ### I want to customise the widget.
 
 If you want to have full control of how to show ENS referral, I suggest using our [renewal library](https://github.com/ensdomains/renewal) wchich this widget uses underneath.
+
+### What if our app/site has our own way of renewing ENS withing going to app.ens.domains?
+
+Please contact makoto@ens.domains. We can discuss separately.
